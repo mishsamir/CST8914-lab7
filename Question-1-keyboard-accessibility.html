@@ -21,12 +21,12 @@ body {
   font-family: Lato, sans-serif;
 }
 
-a{
-  color: #006b3a;
+main a: focus{
+   outline: 0.5rem solid #25aa00;
+  border-radius: 5px;                     <!--  Restore visible focus indicator for links in main -->
 }
-main a{
-  outline: none;
-}
+
+
 h2 {
   margin-top: 0;
 }
@@ -206,22 +206,19 @@ article p {
       <nav class="menu">
         <a href="#">Home</a>
         <a href="#">Politics</a>
-        <a href="#" tabindex="-1">Business</a>
+        <a href="#">Business</a>  <!-- Remove the tabindex=-1 to make the element tab focusable -->
         <a href="#">Entertainment</a>
         <a href="#">Sports</a>
-        <a href="#" class="btn-search pull-right"><img src="https://raw.githubusercontent.com/udacity/ud891/2de2a0688c68809a3b453db3a24b1a59e8401459/lesson2-focus/02-dom-order/images/search.svg" alt="Search" />Search</a> 
+        <button class="btn-search pull-right">
+<img src="https://raw.githubusercontent.com/udacity/ud891/2de2a0688c68809a3b453db3a24b1a59e8401459/lesson2-focus/02-dom-order/images/search.svg" alt="Search" />Search
+</button>
+<!--  Replaced <a> with <button> since this is an action, not a navigation link. -->
+
 
       </nav>
     </div>
   </header>
-  <div class="newsletter">
-    <div class="container">
-      <h3>Like the Funion? Consider joining our newsletter!</h3>
-      <input type="text">
-      <button type="button" onfocus="getFocus()">Sign up</button></div>
-      
-    </div>
-  </div>
+  
   <main class="container">
     <h2 class="offscreen">Top story</h2>
     <article class="main-story">
@@ -239,11 +236,11 @@ article p {
     <div class="side-by-side">
       <div class="column">
         <div class="tier-header">
-          <h2 tabindex="0">In the news</h2>
+          <h2>In the news</h2> <!-- Removed tabindex="0" since h2 is heading not interactive element -->
         </div>
         <article>
           <h3 class="headline">Bee wonders if maybe everyone else is a drone and he's the only one who has it "figured out."</h3>
-          <p><a href="#" tabindex="1"><b>Read More</b></a></p>
+          <p><a href="#"><b>Read More</b></a></p> <!-- Removed tabindex="1" to maintain the focus tab order -->  
           <img src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/bee.jpg?raw=true" alt="A bee on top of a flower" />
         </article>
       </div>
@@ -286,6 +283,17 @@ article p {
     </div>
     
   </main>
+<!-- Moved newsletter to end of DOM to match visual order for logical tabbing -->
+
+<div class="newsletter">
+    <div class="container">
+      <h3>Like the Funion? Consider joining our newsletter!</h3>
+      <input type="text" aria-label="Join the newsletter using email"> <!-- Added aria-label for more accessibility -->
+      <button type="button" onclick="getFocus()">Sign up</button></div>  <!-- Change onfocus to onclick, not to open the new window while using tab -->
+      
+    </div>
+</div>
+
   <!--   stuff can be added here :)
   <footer>
   </footer>
@@ -293,7 +301,7 @@ article p {
   
   <script>
     function getFocus() {
-      window.open('https://aidaform.com/templates/thank-you-page-with-redirects.html','mywindow').focus()
+       window.open('https://aidaform.com/templates/thank-you-page-with-redirects.html','mywindow').focus;
     }
     </script>
 </body>
